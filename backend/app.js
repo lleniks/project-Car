@@ -1,8 +1,8 @@
 app.use(cors());
 app.use(express.json());
 
-const frontendPath
-app.use(express.static(frontendPath)); = path.resolve(__dirname, '../frontend');
+const frontendPath = path.resolve(__dirname, '../frontend');
+app.use(express.static(frontendPath));
 
 app.use('/HTML', express.static(path.join(frontendPath, 'HTML')));
 app.use('/JS', express.static(path.join(frontendPath, 'JS')));
