@@ -12,15 +12,14 @@ const frontendPath = path.resolve(__dirname, '../frontend');
 
 app.use(express.static(frontendPath));
 app.use('/image', express.static(path.join(frontendPath, 'image')));
-app.use('/Image', express.static(path.join(frontendPath, 'Image')));
 
-const carsRouter = require('./routes/carRoutes');
-const adminRouter = require('./routes/adminRoutes');
-const userRouter = require('./routes/userRoutes');  
+// const carsRouter = require('./routes/carRoutes');
+// const adminRouter = require('./routes/adminRoutes');
+// const userRouter = require('./routes/userRoutes');  
 
-app.use('/api', carsRouter);
-app.use('/api/admin', adminRouter);
-app.use('/api/users', userRouter);  
+// app.use('/api', carsRouter);
+// app.use('/api/admin', adminRouter);
+// app.use('/api/users', userRouter);  
 
 app.use('/api', (req, res) => {
     res.status(404).json({ message: 'Маршрут не найден' });
