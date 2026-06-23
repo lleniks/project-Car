@@ -1,7 +1,16 @@
 const Database = require('better-sqlite3');
 const path = require('path');
+const fs = require('fs');
+const isRender = process.env.RENDER === 'true';
 
-const db = new Database(path.resolve(__dirname, '../project.db')); 
+const dbPath = isRender 
+    ? '/tmp/project.db' 
+    : path.resolve(__dirname, '../project.db');
+
+
+console.log(`[DB] Подключение базы данных по пути: ${dbPath}`);
+
+const db = new Database(dbPath);
 
 db.exec(`CREATE TABLE IF NOT EXISTS cars (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
