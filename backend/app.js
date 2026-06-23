@@ -1,8 +1,16 @@
+﻿const express = require('express');
+const cors = require('cors');
+const path = require('path');
+
+const app = express();
+const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 
 const frontendPath = path.resolve(__dirname, '../frontend');
 app.use(express.static(frontendPath));
+
+app.use('/JS', express.static(path.join(__dirname, '../frontend/JS')));
 
 app.use('/HTML', express.static(path.join(frontendPath, 'HTML')));
 app.use('/JS', express.static(path.join(frontendPath, 'JS')));
@@ -26,4 +34,4 @@ app.get('*', (req, res) => {
 
 app.listen(PORT, () => {
     console.log(`Server successfully running on port ${PORT}`);
-});ы
+});
