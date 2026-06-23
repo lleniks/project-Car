@@ -237,7 +237,7 @@ button:hover {
 }
 
 .banner {
-    margin-top: 60px;
+    margin-top: 60px; 
     position: relative;
     border-radius: 20px;
     overflow: hidden;
