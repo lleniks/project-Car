@@ -14,15 +14,15 @@ app.use((req, res, next) => {
 });
 
 app.get('/', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'frontend', 'index.html'));
+    res.sendFile(path.join(__dirname, '../frontend/index.html'));
 });
 
-app.get('/catalog', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'frontend', 'HTML', 'catalog.html'));
+app.get('/catalog.html', (req, res) => {
+    res.sendFile(path.join(__dirname, '../frontend/HTML/catalog.html'));
 });
- 
-app.get('/login', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'frontend', 'HTML', 'login.html'));
+
+app.get('/login.html', (req, res) => {
+    res.sendFile(path.join(__dirname, '../frontend/HTML/login.html'));
 });
 
 app.get('/kontakt', (req, res) => {
