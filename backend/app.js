@@ -1,4 +1,12 @@
 const express = require('express');
+process.on('uncaughtException', (err) => {
+    console.error('КРИТИЧЕСКАЯ ОШИБКА НА СЕРВЕРЕ:', err.stack);
+    process.exit(1);
+});
+
+process.on('unhandledRejection', (reason, promise) => {
+    console.error('НЕОБРАБОТАННОЕ ИСКЛЮЧЕНИЕ:', reason);
+});
 const cors = require('cors');
 const path = require('path');
 
