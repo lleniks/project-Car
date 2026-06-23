@@ -1,0 +1,314 @@
+* { margin:0; padding:0; box-sizing:border-box; font-family: 'Segoe UI', Arial, sans-serif; }
+
+body {
+    background: #0f0f0f;
+    color: #fff;
+    min-height: 100vh;
+    display: flex;
+}
+
+.sidebar {
+    width: 220px;
+    min-height: 100vh;
+    background: #1a1a1a;
+    border-right: 1px solid #2a2a2a;
+    display: flex;
+    flex-direction: column;
+    padding: 30px 16px;
+    gap: 8px;
+    position: fixed;
+    top: 0; left: 0; bottom: 0;
+}
+
+.sidebar-logo {
+    font-size: 20px;
+    font-weight: 700;
+    color: #c97a27;
+    margin-bottom: 24px;
+    padding-left: 8px;
+    letter-spacing: 1px;
+}
+
+.sidebar a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: #aaa;
+    font-size: 15px;
+    padding: 11px 14px;
+    border-radius: 10px;
+    transition: background 0.2s, color 0.2s;
+    font-weight: 500;
+}
+
+.sidebar a:hover, .sidebar a.active {
+    background: #c97a27;
+    color: #fff;
+}
+
+.sidebar a span.icon { font-size: 18px; }
+
+.main {
+    margin-left: 220px;
+    flex: 1;
+    padding: 40px 40px 40px 50px;
+    max-width: 860px;
+}
+
+.profile-card {
+    background: #1a1a1a;
+    border-radius: 16px;
+    padding: 28px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    margin-bottom: 24px;
+    border: 1px solid #2a2a2a;
+}
+
+.avatar-wrap {
+    position: relative;
+    width: 88px;
+    height: 88px;
+    flex-shrink: 0;
+}
+
+.avatar {
+    width: 88px;
+    height: 88px;
+    border-radius: 50%;
+    background: #c97a27;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 42px;
+    cursor: pointer;
+    overflow: hidden;
+    border: 3px solid #c97a27;
+    transition: opacity 0.2s;
+}
+
+.avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.avatar-overlay {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: rgba(0,0,0,0.55);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    color: #fff;
+    opacity: 0;
+    cursor: pointer;
+    transition: opacity 0.2s;
+    text-align: center;
+    line-height: 1.3;
+}
+
+.avatar-wrap:hover .avatar-overlay { opacity: 1; }
+
+#avatarInput { display: none; }
+
+.profile-info { flex: 1; }
+
+.profile-name {
+    font-size: 32px;
+    font-weight: 700;
+    color: #fff;
+}
+
+.profile-email {
+    font-size: 14px;
+    color: #888;
+    margin-top: 4px;
+}
+
+.profile-badge {
+    background: #c97a2722;
+    color: #c97a27;
+    border: 1px solid #c97a2744;
+    border-radius: 20px;
+    font-size: 12px;
+    padding: 3px 12px;
+    margin-top: 10px;
+    display: inline-block;
+}
+
+.section-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    margin-bottom: 14px;
+}
+
+.payment-card {
+    background: #1a1a1a;
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 24px;
+    border: 1px solid #2a2a2a;
+}
+
+.card-display {
+    background: linear-gradient(135deg, #c97a27, #a85f1a);
+    border-radius: 14px;
+    padding: 22px 24px;
+    margin-bottom: 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+.card-display::before {
+    content: '';
+    position: absolute;
+    top: -30px; right: -30px;
+    width: 130px; height: 130px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.07);
+}
+
+.card-display::after {
+    content: '';
+    position: absolute;
+    bottom: -40px; right: 40px;
+    width: 160px; height: 160px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.05);
+}
+
+.card-label {
+    font-size: 11px;
+    color: rgba(255,255,255,0.7);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+}
+
+.card-number-display {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: #fff;
+    font-family: 'Courier New', monospace;
+}
+
+.card-number-display.empty {
+    color: rgba(255,255,255,0.4);
+    font-size: 16px;
+    letter-spacing: 1px;
+}
+
+.card-input-row {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.card-input-row input {
+    flex: 1;
+    background: #111;
+    border: 1px solid #333;
+    border-radius: 10px;
+    color: #fff;
+    font-size: 15px;
+    padding: 11px 16px;
+    outline: none;
+    transition: border 0.2s;
+    font-family: 'Courier New', monospace;
+    letter-spacing: 2px;
+}
+
+.card-input-row input:focus { border-color: #c97a27; }
+.card-input-row input::placeholder { color: #555; letter-spacing: 1px; font-family: Arial; }
+
+.btn-save {
+    background: #c97a27;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 11px 20px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+    white-space: nowrap;
+}
+
+.btn-save:hover { background: #df8c34; }
+
+.card-hint {
+    font-size: 12px;
+    color: #555;
+    margin-top: 8px;
+}
+
+.payments-section {
+    background: #1a1a1a;
+    border-radius: 16px;
+    padding: 24px;
+    border: 1px solid #2a2a2a;
+}
+
+.payments-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-top: 4px;
+}
+
+.pay-logo {
+    background: #fff;
+    border-radius: 10px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 56px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+}
+
+.pay-logo:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(201,122,39,0.3);
+}
+
+.pay-logo img {
+    max-height: 32px;
+    max-width: 100%;
+    object-fit: contain;
+}
+
+.toast {
+    position: fixed;
+    bottom: 30px; right: 30px;
+    background: #1a1a1a;
+    border: 1px solid #c97a27;
+    color: #fff;
+    padding: 14px 22px;
+    border-radius: 12px;
+    font-size: 14px;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.3s;
+    pointer-events: none;
+    z-index: 999;
+}
+.toast.show { opacity: 1; transform: translateY(0); }
+
+@media(max-width: 768px) {
+    .sidebar { width: 100%; min-height: auto; position: relative; flex-direction: row; flex-wrap: wrap; padding: 16px; }
+    .sidebar-logo { width: 100%; margin-bottom: 10px; }
+    .main { margin-left: 0; padding: 20px; }
+    .payments-grid { grid-template-columns: repeat(2,1fr); }
+}

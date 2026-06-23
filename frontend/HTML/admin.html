@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Админ панель — DriveCar</title>
+    <link rel="stylesheet" href="../CSS/admin.css">
+</head>
+<body>
+<div id="loginScreen">
+    <div class="login-box">
+        <h2>Вход для администратора</h2>
+        <input type="text" id="adminLogin" placeholder="Логин" autocomplete="off">
+        <input type="password" id="adminPassword" placeholder="Пароль">
+        <button onclick="doLogin()">Войти</button>
+        <p id="loginError"></p>
+    </div>
+</div>
+
+<div id="adminPanel">
+    <header style="margin: -32px -32px 32px; position: sticky; top: 0; z-index: 10;">
+        <h1> DriveCar — Админ панель</h1>
+        <button id="logoutBtn" onclick="doLogout()">Выйти</button>
+    </header>
+
+    <div class="panel-top">
+        <h2>Автопарк</h2>
+        <button id="addCarBtn" onclick="openModal()">+ Добавить автомобиль</button>
+    </div>
+
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Фото</th>
+                    <th>Название</th>
+                    <th>Двигатель</th>
+                    <th>Мощность</th>
+                    <th>Привод</th>
+                    <th>Цена</th>
+                    <th>Действия</th>
+                </tr>
+            </thead>
+            <tbody id="carsTableBody"></tbody>
+        </table>
+    </div>
+</div>
+
+<div class="modal-overlay" id="carModal">
+    <div class="modal">
+        <h3 id="modalTitle">Добавить автомобиль</h3>
+        <input type="hidden" id="carId">
+        <label>Название</label>
+        <input type="text" id="carTitle" placeholder="BMW M5 Competition">
+        <label>Путь к изображению</label>
+        <input type="text" id="carImage" placeholder="Image/bmw.jpg">
+        <label>Двигатель (info1)</label>
+        <input type="text" id="carInfo1" placeholder="Двигатель: 4.4L V8 Битурбо">
+        <label>Мощность (info2)</label>
+        <input type="text" id="carInfo2" placeholder="Мощность: 560 л.с. / Механика">
+        <label>Привод (info3)</label>
+        <input type="text" id="carInfo3" placeholder="Привод: Задний / 5 мест">
+        <label>Цена</label>
+        <input type="text" id="carPrice" placeholder="20 000 тг/сутки">
+        <div class="modal-btns">
+            <button id="cancelCarBtn" onclick="closeModal()">Отмена</button>
+            <button id="saveCarBtn" onclick="saveCar()">Сохранить</button>
+        </div>
+    </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const API = 'http://localhost:3000/api';
+let token = localStorage.getItem('adminToken');
+
+async function doLogin() {
+    const login = document.getElementById('adminLogin').value.trim();
+    const password = document.getElementById('adminPassword').value.trim();
+
+    try {
+        const res = await fetch(`${API}/admin/login`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ login, password })
+        });
+        const data = await res.json();
+
+        if (!res.ok) {
+            document.getElementById('loginError').textContent = data.message;
+            return;
+        }
+
+        token = data.token;
+        localStorage.setItem('adminToken', token);
+        showPanel();
+    } catch {
+        document.getElementById('loginError').textContent = 'Сервер недоступен';
+    }
+}
+
+function doLogout() {
+    localStorage.removeItem('adminToken');
+    token = null;
+    document.getElementById('adminPanel').style.display = 'none';
+    document.getElementById('loginScreen').style.display = 'flex';
+}
+
+function showPanel() {
+    document.getElementById('loginScreen').style.display = 'none';
+    document.getElementById('adminPanel').style.display = 'block';
+    loadCars();
+}
+
+if (token) showPanel();
+
+async function loadCars() {
+    const res = await fetch(`${API}/cars`);
+    const cars = await res.json();
+    renderTable(cars);
+}
+
+function renderTable(cars) {
+    const tbody = document.getElementById('carsTableBody');
+    tbody.innerHTML = '';
+
+    cars.forEach(car => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+            <td>${car.id}</td>
+            <td><img class="car-img-preview" src="../${car.image}" alt="" onerror="this.style.opacity=0.2"></td>
+            <td>${car.title}</td>
+            <td>${car.info1 || '—'}</td>
+            <td>${car.info2 || '—'}</td>
+            <td>${car.info3 || '—'}</td>
+            <td>${car.price}</td>
+            <td>
+                <button class="btn-edit" onclick="openModal(${JSON.stringify(car).replace(/"/g, '&quot;')})">Изменить</button>
+                <button class="btn-delete" onclick="deleteCar(${car.id})">Удалить</button>
+            </td>
+        `;
+        tbody.appendChild(tr);
+    });
+}
+
+function openModal(car = null) {
+    document.getElementById('carId').value = car ? car.id : '';
+    document.getElementById('carTitle').value = car ? car.title : '';
+    document.getElementById('carImage').value = car ? car.image : '';
+    document.getElementById('carInfo1').value = car ? (car.info1 || '') : '';
+    document.getElementById('carInfo2').value = car ? (car.info2 || '') : '';
+    document.getElementById('carInfo3').value = car ? (car.info3 || '') : '';
+    document.getElementById('carPrice').value = car ? car.price : '';
+    document.getElementById('modalTitle').textContent = car ? 'Редактировать автомобиль' : 'Добавить автомобиль';
+    document.getElementById('carModal').classList.add('open');
+}
+
+function closeModal() {
+    document.getElementById('carModal').classList.remove('open');
+}
+
+async function saveCar() {
+    const id = document.getElementById('carId').value;
+    const body = {
+        title: document.getElementById('carTitle').value,
+        image: document.getElementById('carImage').value,
+        info1: document.getElementById('carInfo1').value,
+        info2: document.getElementById('carInfo2').value,
+        info3: document.getElementById('carInfo3').value,
+        price: document.getElementById('carPrice').value,
+    };
+
+    const url = id ? `${API}/admin/cars/${id}` : `${API}/admin/cars`;
+    const method = id ? 'PUT' : 'POST';
+
+    const res = await fetch(url, {
+        method,
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify(body)
+    });
+
+    if (res.ok) {
+        showToast(id ? 'Автомобиль обновлён' : 'Автомобиль добавлен');
+        closeModal();
+        loadCars();
+    } else {
+        const data = await res.json();
+        showToast(data.message || 'Ошибка', true);
+    }
+}
+
+async function deleteCar(id) {
+    if (!confirm('Удалить этот автомобиль?')) return;
+
+    const res = await fetch(`${API}/admin/cars/${id}`, {
+        method: 'DELETE',
+        headers: { 'Authorization': `Bearer ${token}` }
+    });
+
+    if (res.ok) {
+        showToast('Автомобиль удалён');
+        loadCars();
+    } else {
+        showToast('Ошибка удаления', true);
+    }
+}
+
+function showToast(msg, isError = false) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.className = 'toast' + (isError ? ' error' : '') + ' show';
+    setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+document.addEventListener('keydown', e => {
+    if (e.key === 'Enter' && document.getElementById('loginScreen').style.display !== 'none') {
+        doLogin();
+    }
+});
+</script>
+</body>
+</html>

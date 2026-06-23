@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Каталог — DriveCar</title>
+    <link rel="stylesheet" href="../CSS/catalog.css">
+</head>
+<body>
+
+<header class="cat-header">
+    <a href="../index.html">
+        <img src="../Image/logo2.jpeg" id="logo" width="70" height="70">
+    </a>
+    <div class="header-user">
+         <span id="headerUser"></span>
+    </div>
+</header>
+
+<section class="fleet">
+    <div class="container">
+        <div class="fleet-top">
+            <h2 class="fleet-title">Наш автопарк</h2>
+            <div class="filters">
+                <select id="brandFilter">
+                    <option value="all">Все марки</option>
+                    <option value="BMW">BMW</option>
+                    <option value="Mercedes">Mercedes</option>
+                    <option value="Porsche">Porsche</option>
+                    <option value="Range Rover">Range Rover</option>
+                    <option value="Audi">Audi</option>
+                    <option value="Mazda">Mazda</option>
+                </select>
+                <select id="sortFilter">
+                    <option value="all">Сортировка</option>
+                    <option value="price_asc">Цена ↑</option>
+                    <option value="price_desc">Цена ↓</option>
+                </select>
+                <button id="applyFilters">Применить</button>
+            </div>
+        </div>
+        <div class="cars" id="carsContainer"></div>
+    </div>
+</section>
+
+<div class="modal-overlay" id="details-modal">
+    <div class="modal-box">
+        <button class="modal-close" onclick="closeDetails()">✕</button>
+        <img id="modal-img" src="" alt="">
+        <div class="modal-body">
+            <h2 id="modal-title"></h2>
+            <div id="modal-info"></div>
+            <button class="btn-book-modal" onclick="closeDetails(); openBooking(0, document.getElementById('modal-title').textContent, document.querySelector('.modal-price')?.textContent)">Забронировать</button>
+        </div>
+    </div>
+</div>
+
+<div class="modal-overlay" id="booking-modal">
+    <div class="modal-box booking-box">
+        <button class="modal-close" onclick="closeBooking()">✕</button>
+        <div class="booking-header">
+            <h2>Бронирование</h2>
+            <div class="booking-car-name" id="booking-car-title"></div>
+            <div class="booking-car-price" id="booking-car-price"></div>
+        </div>
+        <form id="booking-form">
+            <div class="form-group">
+                <label>Ваше имя</label>
+                <input type="text" id="booking-name" placeholder="Иван Иванов" required>
+            </div>
+            <div class="form-group">
+                <label>Телефон</label>
+                <input type="tel" id="booking-phone" placeholder="+7 777 000 00 00" required>
+            </div>
+            <div class="form-group">
+                <label>Адрес подачи автомобиля</label>
+                <input type="text" id="booking-address" placeholder="ул. Абая, 1" required>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Дата получения</label>
+                    <input type="datetime-local" id="booking-from" required>
+                </div>
+                <div class="form-group">
+                    <label>Дата возврата</label>
+                    <input type="datetime-local" id="booking-to" required>
+                </div>
+            </div>
+            <div class="booking-msg" id="booking-msg"></div>
+            <button type="submit" class="btn-submit">Подтвердить бронирование</button>
+        </form>
+    </div>
+</div>
+
+<script src="../JS/catalog.js"></script>
+</body>
+</html>

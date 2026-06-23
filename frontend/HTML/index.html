@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Прокат автомобилей</title>
+
+    <link rel="stylesheet" href="CSS/style.css">
+</head>
+
+<body>
+    
+    <header>
+    <div class="container">
+        <a href="index.html">
+            <img src="Image/logo2.jpeg" id="logo" width="100" height="100">
+        </a>
+
+        <ul id="menu" class="menu">
+            <li><a href="HTML/catalog.html">Автопарк</a></li>
+            <li><a href="HTML/login.html">Вход/регистрация</a></li>
+            <li><a href="HTML/kontakt.html">Контакты</a></li>
+            <li><a href="HTML/kabinet.html">Мой кабинет</a></li>
+        </ul>
+
+        <div id="burger" class="burger">
+            <span class="burger-line"></span>
+            <span class="burger-line"></span>
+            <span class="burger-line"></span>
+        </div>
+    </div>
+</header>
+
+    <main>
+
+        <section class="hero">
+
+            <h1> Премиальный Прокат автомобилей</h1>
+            <p>
+                Свобода в движении — авто в аренду за минуты
+            </p>
+
+            <a href="HTML/catalog.html" class="btn" type="button" >Смотреть автопарк →</a>
+
+        </section>
+
+
+        <section class="popular-cars">
+
+            <h2>Популярные автомобили</h2>
+
+            <div class="cars-list">
+
+                <article class="car-card"></article>
+                    
+            </div>
+
+        </section>
+
+        <section class="stats">
+
+            <div class="stat-box">
+                <h2>500+</h2>
+                <p>Автомобилей в нашем автопарке</p>
+            </div>
+
+            <div class="stat-box">
+                <h2>2500+</h2>
+                <p>Довольных клиентов</p>
+            </div>
+
+            <div class="stat-box">
+                <h2>100%</h2>
+                <p>Гарантия безопасности и прозрачности</p>
+            </div>
+
+            <div class="stat-box">
+                <h2>24/7</h2>
+                <p>Поддержка клиентов круглосуточно</p>
+            </div>
+
+        </section>
+
+        <section class="about">
+
+            <img src="Image/картинка.jpeg" >
+
+            <div class="about-text">
+
+                <div class="small-title">О НАС</div>
+
+                <h1>
+                    Мы создаем комфорт и свободу движения
+                </h1>
+
+                <p>
+                    DriveCar — это больше, чем просто аренда авто.
+                    Это сервис премиум-класса, где каждый клиент
+                    получает индивидуальный подход и высокий
+                    уровень обслуживания.
+                </p>
+
+                <div class="features">
+
+                    <div class="feature">
+                        <h3>Премиальные автомобили</h3>
+                        <p>Только новые авто в идеальном состоянии</p>
+                    </div>
+
+                    <div class="feature">
+                        <h3>Выгодные условия</h3>
+                        <p>Честные цены и гибкие условия аренды</p>
+                    </div>
+
+                    <div class="feature">
+                        <h3>Индивидуальный подход</h3>
+                        <p>Персональный менеджер под ваши потребности</p>
+                    </div>
+
+                </div>
+            </div>
+
+        </section>
+
+        <section class="banner">
+
+            <img src="Image/джип едет.jpeg">
+
+            <div class="banner-content">
+
+                <h1>Готовы к новым впечатлениям?</h1>
+
+                <p>
+                    Забронируйте автомобиль прямо сейчас
+                    и наслаждайтесь каждой поездкой.
+                </p>
+
+                <a href="HTML/catalog.html" class="btn">Забронировать → </a>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <footer>
+
+        <div class="container footer-content">
+            <div class="logo"> DriveCar </div>
+            <div class="footer-nav">
+
+                <a href="#">Главная</a>
+                <a href="#">Автопарк</a>
+                <a href="#">Контакты</a>
+
+            </div>
+
+        </div>
+
+    </footer>  
+
+    <dialog id="car-details-modal" class="premium-modal">
+    <div class="modal-overlay"></div>
+    <div class="modal-wrapper">
+        <button type="button" class="close-modal-btn" id="close-details-btn">&times;</button>
+        <div id="modal-car-info">
+            </div>
+    </div>
+    </dialog>
+
+    <script src="js/index.js"></script>
+</body>
+</html>

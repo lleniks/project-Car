@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Контакты — Drivecar</title>
+<link rel="stylesheet" href="../CSS/kontakt.css">
+</head>
+<body>
+
+<header>
+  <div class="container header-inner">
+    <div class="logo"><span>Drive</span>car</div>
+    <nav>
+      <a href="../index.html">Главная</a>
+      <a href="../HTML/catalog.html">Автопарк</a>
+    </nav>
+    <button class="btn-header">Связаться с нами</button>
+  </div>
+</header>
+
+<section class="contact-section">
+  <div class="container contact-grid">
+
+    <div class="contact-left">
+      <div class="section-tag">КОНТАКТЫ</div>
+      <h1>Свяжитесь с нами</h1>
+      <p class="contact-desc">Готовы поговорить в любое время. Мы на связи!</p>
+
+      <div class="contact-items">
+        <div class="contact-item">
+          <div class="contact-icon"></div>
+          <div>
+            <div class="contact-label">Email</div>
+            <a href="mailto:Car@Drivecar.com" class="contact-value">Car@Drivecar.com</a>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon"></div>
+          <div>
+            <div class="contact-label">Телефон</div>
+            <a href="tel:+71234567890" class="contact-value">+7 (123) 456-78-90</a>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon"></div>
+          <div>
+            <div class="contact-label">Адрес</div>
+            <span class="contact-value-dark">г. Петропавловск, ул. Астана, 167</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="contact-form-box">
+      <h2>Напишите нам</h2>
+      <div class="form-row">
+        <input type="text" id="fname" placeholder="Ваше имя">
+        <input type="email" id="femail" placeholder="Email">
+      </div>
+      <input type="text" id="fsubject" placeholder="Тема">
+      <textarea id="fmessage" placeholder="Сообщение" rows="5"></textarea>
+      <div class="form-msg" id="formMsg"></div>
+      <button class="btn-submit" onclick="sendForm()">Отправить сообщение</button>
+    </div>
+
+  </div>
+</section>
+
+<section class="map-section">
+  <div class="container">
+    <div class="map-wrap">
+      <div class="map-card">
+        <strong>Мы здесь</strong>
+        <p>г. Петропавловск, ул. Астана, 167</p>
+        <a href="https://yandex.ru/maps" target="_blank">Открыть в Яндекс.Картах →</a>
+      </div>
+      <iframe
+        src="https://yandex.ru/map-widget/v1/?text=Петропавловск%2C+ул.+Астана%2C+167&z=16"
+        allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container footer-grid">
+    <div class="footer-brand">
+      <div class="logo"><span>Drive</span>car</div>
+      <p>Твой маршрут — наш автомобиль.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Навигация</h4>
+      <a href="#">Главная</a>
+      <a href="../index.html">Автопарк</a>
+      <a href="#"></a>
+    </div>
+
+    <div class="footer-col">
+      <h4>Контакты</h4>
+      <a href="#"> Car@Drivecar.com</a>
+      <a href="#"> +7 (123) 456-78-90</a>
+      <a href="#"> г. Петропавловск, ул. Астана, 167</a>
+    </div>
+  </div>
+</footer>
+
+<script src="../JS/kontakt.js"></script>
+</body>
+</html>
