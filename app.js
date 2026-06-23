@@ -8,8 +8,13 @@ const PORT = 3000;
 app.use(cors());
 app.use(express.json());
 
+app.use((req, res, next) => {
+    req.url = req.url.toLowerCase();
+    next();
+});
+
 app.use(express.static(path.resolve(__dirname, 'frontend')));
-app.use('/Image', express.static(path.resolve(__dirname, 'frontend/Image')));
+app.use('/image', express.static(path.resolve(__dirname, 'frontend/Image')));
 
 const carsRouter = require('./routes/carRoutes');
 const adminRouter = require('./routes/adminRoutes');
