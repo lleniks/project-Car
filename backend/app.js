@@ -9,9 +9,12 @@ app.use(cors());
 app.use(express.json());
 
 const frontendPath = path.resolve(__dirname, '../frontend');
-
 app.use(express.static(frontendPath));
+
+app.use('/css', express.static(path.join(frontendPath, 'css')));
+app.use('/js', express.static(path.join(frontendPath, 'js')));
 app.use('/image', express.static(path.join(frontendPath, 'image')));
+app.use('/Image', express.static(path.join(frontendPath, 'Image')));
 
 const carsRouter = require('./routes/carRoutes');
 const adminRouter = require('./routes/adminRoutes');
