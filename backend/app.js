@@ -3,7 +3,11 @@ const cors = require('cors');
 const path = require('path');
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => {
+    console.log(`Сервер запущен на порту ${PORT}`);
+});
 
 app.use(cors());
 app.use(express.json());
