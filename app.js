@@ -13,26 +13,22 @@ app.use((req, res, next) => {
     next();
 });
 
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '../frontend/index.html'));
+app.use(express.static(path.resolve(__dirname, '../frontend')));
+app.use(express.static(path.resolve(__dirname, '../frontend/HTML')));
+app.use('/image', express.static(path.resolve(__dirname, '../frontend/Image')));
+
+const carsRouter = require('./routes/carRoutes');
+const adminRouter = require('./routes/adminRoutes');
+const userRouter = require('./routes/userRoutes');
+
+app.use('/api', carsRouter);
+app.use('/api/admin', adminRouter);
+app.use('/api/users', userRouter);
+
+app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, '../frontend/index.html'));
 });
 
-app.get('/catalog.html', (req, res) => {
-    res.sendFile(path.join(__dirname, '../frontend/HTML/catalog.html'));
-});
-
-app.get('/login.html', (req, res) => {
-    res.sendFile(path.join(__dirname, '../frontend/HTML/login.html'));
-});
-
-app.get('/kontakt', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'frontend', 'HTML', 'kontakt.html'));
-});
-
-app.get('/kabinet', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'frontend', 'HTML', 'kabinet.html'));
-});
-
-app.use((req, res) => {
-    res.status(404).json({ message: 'Маршрут не найден' });
+app.listen(PORT, () => {
+    console.log(`Сервер запущен на http://localhost:${PORT}`);
 });
