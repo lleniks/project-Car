@@ -25,8 +25,8 @@ app.use('/api', carsRouter);
 app.use('/api/admin', adminRouter);
 app.use('/api/users', userRouter);
 
-app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, '../frontend/index.html'));
+app.use((req, res) => {
+    res.status(404).json({ message: 'Маршрут не найден' });
 });
 
 app.listen(PORT, () => {
