@@ -12,6 +12,9 @@ app.use(express.json());
 //     req.url = req.url.toLowerCase();
 //     next();
 // });
+app.use('/CSS', express.static(path.resolve(__dirname, '../frontend/CSS')));
+app.use('/JS', express.static(path.resolve(__dirname, '../frontend/JS')));
+app.use('/Image', express.static(path.resolve(__dirname, '../frontend/Image')));
 
 app.use(express.static(path.resolve(__dirname, '../frontend')));
 app.use(express.static(path.resolve(__dirname, '../frontend/HTML')));
